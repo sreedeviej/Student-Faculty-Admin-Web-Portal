@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Campus Portal</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { margin: 0; background: linear-gradient(135deg, #e0eafc, #cfdef3); }
+
+/* LOGIN */
+.login-box {
+  max-width: 380px;
+  margin: 100px auto;
+  background: rgba(255,255,255,0.85);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #185a9d;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #185a9d;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option-btn{
+  width:auto;
+  padding:8px 15px;
+  margin-right:10px;
+  margin-top:10px;
+}
+
+/* SIDENAV */
+ul.sidenav {
+  list-style: none;
+  padding: 20px 0;
+  width: 260px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  height: 100%;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  border-radius: 0 20px 20px 0;
+}
+
+ul.sidenav li a {
+  display: block;
+  padding: 14px 20px;
+  margin: 10px 15px;
+  border-radius: 12px;
+  color: #333;
+  text-decoration: none;
+}
+
+ul.sidenav li a.active {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  color: white;
+}
+
+/* CONTENT */
+.content {
+  margin-left: 280px;
+  padding: 40px;
+}
+
+.section {
+  background: rgba(255,255,255,0.9);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #e8f0ff;
+}
+
+.hidden { display: none; }
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+  <h2>Student Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="error" style="color:red;text-align:center;"></p>
+</div>
+
+<!-- PORTAL -->
+<div id="portal" class="hidden">
+
+<ul class="sidenav">
+  <li><a href="#" onclick="showDashboard()">🏠 Dashboard</a></li>
+  <li><a href="#" onclick="showAttendance()">📊 Attendance</a></li>
+  <li><a href="#" onclick="showResult()">📄 Results</a></li>
+</ul>
+
+<div class="content">
+
+  <!-- DASHBOARD -->
+  <div class="section" id="dashboard">
+    <h2>Welcome, Sreedevi 👋</h2>
+    <p>Department: Computer Science Engineering</p>
+    <p>Use the menu to view your attendance and results.</p>
+  </div>
+
+  <!-- ATTENDANCE -->
+  <div class="section hidden" id="attendance">
+    <h2>Attendance Report</h2>
+
+    <label>Select Semester</label>
+    <select onchange="loadAttendance(this.value)">
+      <option value="">-- Select Semester --</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+      <option value="3">Semester 3</option>
+      <option value="4">Semester 4</option>
+      <option value="5">Semester 5</option>
+      <option value="6">Semester 6</option>
+      <option value="7">Semester 7</option>
+      <option value="8">Semester 8</option>
+    </select>
+
+    <div id="attendanceTable"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section hidden" id="resultSection">
+    <h2>Academic Results</h2>
+
+    <button class="option-btn" onclick="showSemWise()">Semester-wise</button>
+    <button class="option-btn" onclick="showYearWise()">Year-wise</button>
+
+    <div id="resultContent"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+
+/* LOGIN & NAV */
+function login(){
+  if(username.value==="sreedevi" && password.value==="1234"){
+    loginBox.classList.add("hidden");
+    portal.classList.remove("hidden");
+  } else {
+    error.innerText="Invalid credentials";
+  }
+}
+
+function showDashboard(){
+  dashboard.classList.remove("hidden");
+  attendance.classList.add("hidden");
+  resultSection.classList.add("hidden");
+}
+
+function showAttendance(){
+  dashboard.classList.add("hidden");
+  attendance.classList.remove("hidden");
+  resultSection.classList.add("hidden");
+}
+
+function showResult(){
+  dashboard.classList.add("hidden");
+  attendance.classList.add("hidden");
+  resultSection.classList.remove("hidden");
+}
+
+/* ATTENDANCE */
+function loadAttendance(sem){
+  if(!sem) return;
+  let subjects=["Mathematics","Data Structures","Operating Systems","DBMS","Computer Networks","Web Technologies"];
+  let html=`<table><tr><th>Subject</th><th>Attendance %</th></tr>`;
+  subjects.forEach((s,i)=>html+=`<tr><td>${s}</td><td>${75+i*3}%</td></tr>`);
+  html+=`</table>`;
+  attendanceTable.innerHTML=html;
+}
+
+/* SEMESTER SUBJECTS */
+const semesterSubjects={
+  1:["Mathematics I","Physics","Basic Electrical","Programming in C","Engineering Drawing","Communication Skills"],
+  2:["Mathematics II","Chemistry","Data Structures","Digital Logic","Environmental Science","Python Programming"],
+  3:["Discrete Mathematics","OOPS with Java","Operating Systems","DBMS","Computer Organization","Probability & Statistics"],
+  4:["DAA","Computer Networks","Software Engineering","Web Technologies","Microprocessors","Theory of Computation"],
+  5:["Artificial Intelligence","Machine Learning","Compiler Design","Cloud Computing","Information Security","PE-I"],
+  6:["Data Science","Big Data Analytics","IoT","Distributed Systems","Mobile Computing","PE-II"],
+  7:["Deep Learning","Blockchain","DevOps","NLP","Open Elective","Project Phase I"],
+  8:["Entrepreneurship","Ethics","Project Phase II","Internship","Seminar","Open Elective II"]
+};
+
+/* SGPA DATA */
+const sgpaData=[8.1,8.2,8.3,8.4,8.5,8.6,8.7,8.8];
+
+/* SEMESTER-WISE RESULT */
+function showSemWise(){
+  let html="";
+  for(let sem=1;sem<=8;sem++){
+    html+=`<h3>Semester ${sem}</h3><table><tr><th>Subject</th><th>Marks</th></tr>`;
+    semesterSubjects[sem].forEach((sub,i)=>{
+      html+=`<tr><td>${sub}</td><td>${70+sem+i}</td></tr>`;
+    });
+    html+=`</table><p><b>SGPA:</b> ${sgpaData[sem-1]}</p><br>`;
+  }
+  resultContent.innerHTML=html;
+}
+
+/* YEAR-WISE RESULT */
+function showYearWise(){
+  let html="",total=0;
+  for(let y=0;y<4;y++){
+    let cg=((sgpaData[y*2]+sgpaData[y*2+1])/2).toFixed(2);
+    html+=`<h3>Year ${y+1} (Sem ${y*2+1} & ${y*2+2})</h3><p><b>CGPA:</b> ${cg}</p><br>`;
+    total+=sgpaData[y*2]+sgpaData[y*2+1];
+  }
+  html+=`<hr><h3>Overall CGPA: ${(total/8).toFixed(2)}</h3>`;
+  resultContent.innerHTML=html;
+}
+
+</script>
+
+</body>
+</html>
