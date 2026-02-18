@@ -11,22 +11,6 @@
 * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 body { margin: 0; background: linear-gradient(135deg, #e0eafc, #cfdef3); }
 
-/* LOGIN */
-.login-box {
-  max-width: 380px;
-  margin: 100px auto;
-  background: rgba(255,255,255,0.85);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-}
-
-.login-box h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #185a9d;
-}
-
 input, select {
   width: 100%;
   padding: 10px;
@@ -115,17 +99,8 @@ th {
 
 <body>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
-  <h2>Student Login</h2>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="error" style="color:red;text-align:center;"></p>
-</div>
-
 <!-- PORTAL -->
-<div id="portal" class="hidden">
+<div id="portal">
 
 <ul class="sidenav">
   <li><a href="#" onclick="showDashboard()">🏠 Dashboard</a></li>
@@ -177,16 +152,7 @@ th {
 
 <script>
 
-/* LOGIN & NAV */
-function login(){
-  if(username.value==="sreedevi" && password.value==="1234"){
-    loginBox.classList.add("hidden");
-    portal.classList.remove("hidden");
-  } else {
-    error.innerText="Invalid credentials";
-  }
-}
-
+/* NAV */
 function showDashboard(){
   dashboard.classList.remove("hidden");
   attendance.classList.add("hidden");
