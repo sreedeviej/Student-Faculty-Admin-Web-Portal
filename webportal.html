@@ -8,254 +8,232 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-body { margin: 0; background: linear-gradient(135deg, #e0eafc, #cfdef3); }
-
-/* LOGIN */
-.login-box {
-  max-width: 380px;
-  margin: 100px auto;
-  background: rgba(255,255,255,0.85);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-.login-box h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #185a9d;
+body{
+  margin:0;
+  background:linear-gradient(135deg,#e0eafc,#cfdef3);
+  color:#333;
+  overflow-x:hidden;
 }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 12px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  animation:fadeDown 1s ease;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #185a9d;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
+.logo{
+  font-size:22px;
+  font-weight:600;
+  color:#185a9d;
 }
 
-.option-btn{
-  width:auto;
-  padding:8px 15px;
-  margin-right:10px;
-  margin-top:10px;
+nav a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+  transition:color 0.3s ease;
 }
 
-/* SIDENAV */
-ul.sidenav {
-  list-style: none;
-  padding: 20px 0;
-  width: 260px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  height: 100%;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
-  border-radius: 0 20px 20px 0;
+nav a:hover{
+  color:#185a9d;
 }
 
-ul.sidenav li a {
-  display: block;
-  padding: 14px 20px;
-  margin: 10px 15px;
-  border-radius: 12px;
-  color: #333;
-  text-decoration: none;
+/* HERO */
+.hero{
+  text-align:center;
+  padding:90px 20px;
+  animation:fadeUp 1.2s ease;
 }
 
-ul.sidenav li a.active {
-  background: linear-gradient(135deg, #43cea2, #185a9d);
-  color: white;
+.hero h1{
+  font-size:42px;
+  color:#185a9d;
 }
 
-/* CONTENT */
-.content {
-  margin-left: 280px;
-  padding: 40px;
+.hero p{
+  font-size:18px;
+  max-width:620px;
+  margin:20px auto;
+  line-height:1.6;
 }
 
-.section {
-  background: rgba(255,255,255,0.9);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+.hero button{
+  padding:12px 28px;
+  margin:10px;
+  border:none;
+  border-radius:25px;
+  background:#185a9d;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
+.hero button.secondary{
+  background:white;
+  color:#185a9d;
+  border:2px solid #185a9d;
 }
 
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+.hero button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
 }
 
-th {
-  background: #e8f0ff;
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  padding:60px;
 }
 
-.hidden { display: none; }
+.feature-card{
+  background:rgba(255,255,255,0.9);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  animation:float 4s ease-in-out infinite;
+  transition:transform 0.3s ease;
+}
 
+.feature-card:nth-child(2){ animation-delay:0.5s; }
+.feature-card:nth-child(3){ animation-delay:1s; }
+.feature-card:nth-child(4){ animation-delay:1.5s; }
+
+.feature-card:hover{
+  transform:translateY(-6px);
+}
+
+.feature-card h3{
+  color:#185a9d;
+  margin-bottom:10px;
+}
+
+/* USERS */
+.users{
+  padding:60px;
+  text-align:center;
+  animation:fadeUp 1.2s ease;
+}
+
+.users h2{
+  color:#185a9d;
+  margin-bottom:30px;
+}
+
+.user-box{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.user{
+  background:rgba(255,255,255,0.85);
+  padding:25px;
+  width:220px;
+  border-radius:15px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.08);
+  transition:transform 0.3s ease;
+}
+
+.user:hover{
+  transform:scale(1.05);
+}
+
+/* FOOTER */
+footer{
+  background:#185a9d;
+  color:white;
+  text-align:center;
+  padding:15px;
+  margin-top:40px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeDown{
+  from{opacity:0; transform:translateY(-20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes float{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-6px); }
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
-  <h2>Student Login</h2>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="error" style="color:red;text-align:center;"></p>
-</div>
+<header>
+  <div class="logo">Smart Campus</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Features</a>
+    <a href="#">Login</a>
+  </nav>
+</header>
 
-<!-- PORTAL -->
-<div id="portal" class="hidden">
+<section class="hero">
+  <h1>Smart Campus Portal</h1>
+  <p>
+    A unified academic platform to manage attendance, results, guidance,
+    and student–faculty communication — all in one place.
+  </p>
+  <button>Login</button>
+  <button class="secondary">Get Started</button>
+</section>
 
-<ul class="sidenav">
-  <li><a href="#" onclick="showDashboard()">🏠 Dashboard</a></li>
-  <li><a href="#" onclick="showAttendance()">📊 Attendance</a></li>
-  <li><a href="#" onclick="showResult()">📄 Results</a></li>
-</ul>
-
-<div class="content">
-
-  <!-- DASHBOARD -->
-  <div class="section" id="dashboard">
-    <h2>Welcome, Sreedevi 👋</h2>
-    <p>Department: Computer Science Engineering</p>
-    <p>Use the menu to view your attendance and results.</p>
+<section class="features">
+  <div class="feature-card">
+    <h3>📊 Attendance</h3>
+    <p>Track semester-wise attendance with clarity and accuracy.</p>
   </div>
 
-  <!-- ATTENDANCE -->
-  <div class="section hidden" id="attendance">
-    <h2>Attendance Report</h2>
-
-    <label>Select Semester</label>
-    <select onchange="loadAttendance(this.value)">
-      <option value="">-- Select Semester --</option>
-      <option value="1">Semester 1</option>
-      <option value="2">Semester 2</option>
-      <option value="3">Semester 3</option>
-      <option value="4">Semester 4</option>
-      <option value="5">Semester 5</option>
-      <option value="6">Semester 6</option>
-      <option value="7">Semester 7</option>
-      <option value="8">Semester 8</option>
-    </select>
-
-    <div id="attendanceTable"></div>
+  <div class="feature-card">
+    <h3>📄 Results</h3>
+    <p>View semester and year-wise results with performance insights.</p>
   </div>
 
-  <!-- RESULTS -->
-  <div class="section hidden" id="resultSection">
-    <h2>Academic Results</h2>
-
-    <button class="option-btn" onclick="showSemWise()">Semester-wise</button>
-    <button class="option-btn" onclick="showYearWise()">Year-wise</button>
-
-    <div id="resultContent"></div>
+  <div class="feature-card">
+    <h3>🎓 Guidance</h3>
+    <p>Academic and career guidance from faculty and mentors.</p>
   </div>
 
-</div>
-</div>
+  <div class="feature-card">
+    <h3>💬 Communication</h3>
+    <p>Connect with faculty, admission cell, and placement cell.</p>
+  </div>
+</section>
 
-<script>
+<section class="users">
+  <h2>Who Is This For?</h2>
+  <div class="user-box">
+    <div class="user">👩‍🎓 Students</div>
+    <div class="user">👩‍🏫 Faculty</div>
+    <div class="user">⚙️ Administrators</div>
+  </div>
+</section>
 
-/* LOGIN & NAV */
-function login(){
-  if(username.value==="sreedevi" && password.value==="1234"){
-    loginBox.classList.add("hidden");
-    portal.classList.remove("hidden");
-  } else {
-    error.innerText="Invalid credentials";
-  }
-}
-
-function showDashboard(){
-  dashboard.classList.remove("hidden");
-  attendance.classList.add("hidden");
-  resultSection.classList.add("hidden");
-}
-
-function showAttendance(){
-  dashboard.classList.add("hidden");
-  attendance.classList.remove("hidden");
-  resultSection.classList.add("hidden");
-}
-
-function showResult(){
-  dashboard.classList.add("hidden");
-  attendance.classList.add("hidden");
-  resultSection.classList.remove("hidden");
-}
-
-/* ATTENDANCE */
-function loadAttendance(sem){
-  if(!sem) return;
-  let subjects=["Mathematics","Data Structures","Operating Systems","DBMS","Computer Networks","Web Technologies"];
-  let html=`<table><tr><th>Subject</th><th>Attendance %</th></tr>`;
-  subjects.forEach((s,i)=>html+=`<tr><td>${s}</td><td>${75+i*3}%</td></tr>`);
-  html+=`</table>`;
-  attendanceTable.innerHTML=html;
-}
-
-/* SEMESTER SUBJECTS */
-const semesterSubjects={
-  1:["Mathematics I","Physics","Basic Electrical","Programming in C","Engineering Drawing","Communication Skills"],
-  2:["Mathematics II","Chemistry","Data Structures","Digital Logic","Environmental Science","Python Programming"],
-  3:["Discrete Mathematics","OOPS with Java","Operating Systems","DBMS","Computer Organization","Probability & Statistics"],
-  4:["DAA","Computer Networks","Software Engineering","Web Technologies","Microprocessors","Theory of Computation"],
-  5:["Artificial Intelligence","Machine Learning","Compiler Design","Cloud Computing","Information Security","PE-I"],
-  6:["Data Science","Big Data Analytics","IoT","Distributed Systems","Mobile Computing","PE-II"],
-  7:["Deep Learning","Blockchain","DevOps","NLP","Open Elective","Project Phase I"],
-  8:["Entrepreneurship","Ethics","Project Phase II","Internship","Seminar","Open Elective II"]
-};
-
-/* SGPA DATA */
-const sgpaData=[8.1,8.2,8.3,8.4,8.5,8.6,8.7,8.8];
-
-/* SEMESTER-WISE RESULT */
-function showSemWise(){
-  let html="";
-  for(let sem=1;sem<=8;sem++){
-    html+=`<h3>Semester ${sem}</h3><table><tr><th>Subject</th><th>Marks</th></tr>`;
-    semesterSubjects[sem].forEach((sub,i)=>{
-      html+=`<tr><td>${sub}</td><td>${70+sem+i}</td></tr>`;
-    });
-    html+=`</table><p><b>SGPA:</b> ${sgpaData[sem-1]}</p><br>`;
-  }
-  resultContent.innerHTML=html;
-}
-
-/* YEAR-WISE RESULT */
-function showYearWise(){
-  let html="",total=0;
-  for(let y=0;y<4;y++){
-    let cg=((sgpaData[y*2]+sgpaData[y*2+1])/2).toFixed(2);
-    html+=`<h3>Year ${y+1} (Sem ${y*2+1} & ${y*2+2})</h3><p><b>CGPA:</b> ${cg}</p><br>`;
-    total+=sgpaData[y*2]+sgpaData[y*2+1];
-  }
-  html+=`<hr><h3>Overall CGPA: ${(total/8).toFixed(2)}</h3>`;
-  resultContent.innerHTML=html;
-}
-
-</script>
+<footer>
+  © 2026 Smart Campus Portal | Academic Interface
+</footer>
 
 </body>
 </html>
