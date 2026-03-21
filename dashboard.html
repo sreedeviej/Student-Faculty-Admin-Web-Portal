@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<style>
+body{
+  font-family:Poppins,sans-serif;
+  margin:0;
+  background:#f5f7fa;
+}
+
+header{
+  background:#185a9d;
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  padding:30px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 8px 16px rgba(0,0,0,0.1);
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Smart Campus Dashboard</h2>
+</header>
+
+<div class="container">
+  <div class="card" onclick="alert('Attendance Module')">📊 Attendance</div>
+  <div class="card" onclick="alert('Results Module')">📄 Results</div>
+  <div class="card" onclick="alert('Guidance Module')">🎓 Guidance</div>
+  <div class="card" onclick="alert('Communication Module')">💬 Communication</div>
+</div>
+
+</body>
+</html>
