@@ -5,9 +5,9 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background: #eef2f7;
+            background: linear-gradient(to right, #eef2f7, #dfe9f3);
         }
 
         /* Header */
@@ -27,15 +27,19 @@
             font-size: 14px;
         }
 
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
         }
 
         .hero h1 {
             color: #185a9d;
-            font-size: 32px;
+            font-size: 36px;
         }
 
         .hero p {
@@ -45,9 +49,9 @@
         }
 
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             background: #185a9d;
             color: white;
             cursor: pointer;
@@ -95,19 +99,19 @@
     <div class="header">
         <h2>Smart Campus</h2>
         <div class="nav">
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
             <a href="#">Features</a>
             <a href="login.html">Login</a>
         </div>
     </div>
 
     <div class="hero">
-        <h1>Smart Campus Portal</h1>
+        <h1>Welcome to Smart Campus Portal</h1>
         <p>
             Manage attendance, results and communication in one simple platform.
         </p>
 
-        <button onclick="goToLogin()">Login</button>
+        <button onclick="goToLogin()">Get Started</button>
     </div>
 
     <div class="features">

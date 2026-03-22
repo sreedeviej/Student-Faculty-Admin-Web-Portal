@@ -5,46 +5,63 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background: #eef2f7;
+            background: linear-gradient(to right, #185a9d, #43cea2);
         }
 
         /* Header */
         .header {
-            background: #185a9d;
             color: white;
-            padding: 15px 40px;
             text-align: center;
+            padding: 20px;
+            font-size: 22px;
+        }
+
+        /* Login container */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
         }
 
         /* Login box */
         .login-box {
-            width: 300px;
-            margin: 80px auto;
+            width: 320px;
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             text-align: center;
         }
 
+        h3 {
+            color: #185a9d;
+            margin-bottom: 20px;
+        }
+
         input {
-            width: 90%;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 6px;
             border: 1px solid #ccc;
         }
 
+        input:focus {
+            border-color: #185a9d;
+        }
+
         button {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
             background: #185a9d;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            width: 95%;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -54,7 +71,6 @@
         /* Footer */
         .footer {
             text-align: center;
-            background: #185a9d;
             color: white;
             padding: 10px;
             position: fixed;
@@ -67,25 +83,35 @@
 <body>
 
     <div class="header">
-        <h2>Smart Campus Login</h2>
+        Smart Campus Portal
     </div>
 
-    <div class="login-box">
-        <h3>Login</h3>
+    <div class="login-container">
+        <div class="login-box">
+            <h3>Login</h3>
 
-        <input type="text" placeholder="Enter Username">
-        <input type="password" placeholder="Enter Password">
+            <input type="text" id="username" placeholder="Enter Username">
+            <input type="password" id="password" placeholder="Enter Password">
 
-        <button onclick="login()">Login</button>
+            <button onclick="login()">Login</button>
+        </div>
     </div>
 
     <div class="footer">
-        <p>© 2026 Smart Campus Portal</p>
+        © 2026 Smart Campus Portal
     </div>
 
     <script>
         function login() {
-            alert("Login Successful (Demo)");
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            if(user === "" || pass === "") {
+                alert("Please enter username and password");
+                return;
+            }
+
+            // Direct navigation to dashboard (no reload issues)
             window.location.href = "dashboard.html";
         }
     </script>
