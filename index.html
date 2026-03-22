@@ -1,243 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Campus Portal</title>
+    <title>Smart Campus Portal</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #eef2f7;
+        }
 
-*{
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+        /* Header */
+        .header {
+            background: #185a9d;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-body{
-  margin:0;
-  background:linear-gradient(135deg,#e0eafc,#cfdef3);
-  color:#333;
-  overflow-x:hidden;
-}
+        .nav a {
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 60px;
-  animation:fadeDown 1s ease;
-}
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+        }
 
-.logo{
-  font-size:22px;
-  font-weight:600;
-  color:#185a9d;
-}
+        .hero h1 {
+            color: #185a9d;
+            font-size: 32px;
+        }
 
-nav a{
-  margin-left:25px;
-  text-decoration:none;
-  color:#333;
-  font-weight:500;
-  transition:color 0.3s ease;
-}
+        .hero p {
+            max-width: 500px;
+            margin: 15px auto;
+            color: #555;
+        }
 
-nav a:hover{
-  color:#185a9d;
-}
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #185a9d;
+            color: white;
+            cursor: pointer;
+        }
 
-/* HERO */
-.hero{
-  text-align:center;
-  padding:90px 20px;
-  animation:fadeUp 1.2s ease;
-}
+        button:hover {
+            background: #144a82;
+        }
 
-.hero h1{
-  font-size:42px;
-  color:#185a9d;
-}
+        /* Features */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+            flex-wrap: wrap;
+        }
 
-.hero p{
-  font-size:18px;
-  max-width:620px;
-  margin:20px auto;
-  line-height:1.6;
-}
+        .card {
+            background: white;
+            width: 220px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-.hero button{
-  padding:12px 28px;
-  margin:10px;
-  border:none;
-  border-radius:25px;
-  background:#185a9d;
-  color:white;
-  font-size:15px;
-  cursor:pointer;
-  transition:transform 0.25s ease, box-shadow 0.25s ease;
-}
+        .card h3 {
+            color: #185a9d;
+        }
 
-.hero button.secondary{
-  background:white;
-  color:#185a9d;
-  border:2px solid #185a9d;
-}
-
-.hero button:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 18px rgba(0,0,0,0.15);
-}
-
-/* FEATURES */
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-  padding:60px;
-}
-
-.feature-card{
-  background:rgba(255,255,255,0.9);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
-  animation:float 4s ease-in-out infinite;
-  transition:transform 0.3s ease;
-}
-
-.feature-card:nth-child(2){ animation-delay:0.5s; }
-.feature-card:nth-child(3){ animation-delay:1s; }
-.feature-card:nth-child(4){ animation-delay:1.5s; }
-
-.feature-card:hover{
-  transform:translateY(-6px);
-}
-
-.feature-card h3{
-  color:#185a9d;
-  margin-bottom:10px;
-}
-
-/* USERS */
-.users{
-  padding:60px;
-  text-align:center;
-  animation:fadeUp 1.2s ease;
-}
-
-.users h2{
-  color:#185a9d;
-  margin-bottom:30px;
-}
-
-.user-box{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  flex-wrap:wrap;
-}
-
-.user{
-  background:rgba(255,255,255,0.85);
-  padding:25px;
-  width:220px;
-  border-radius:15px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.08);
-  transition:transform 0.3s ease;
-}
-
-.user:hover{
-  transform:scale(1.05);
-}
-
-/* FOOTER */
-footer{
-  background:#185a9d;
-  color:white;
-  text-align:center;
-  padding:15px;
-  margin-top:40px;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes fadeDown{
-  from{opacity:0; transform:translateY(-20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes float{
-  0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(-6px); }
-}
-</style>
+        /* Footer */
+        .footer {
+            background: #185a9d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">Smart Campus</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Features</a>
-    <a href="#">Login</a>
-  </nav>
-</header>
+    <div class="header">
+        <h2>Smart Campus</h2>
+        <div class="nav">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="login.html">Login</a>
+        </div>
+    </div>
 
-<section class="hero">
-  <h1>Smart Campus Portal</h1>
-  <p>
-    A unified academic platform to manage attendance, results, guidance,
-    and student–faculty communication — all in one place.
-  </p>
-  <button onclick="goToLogin()">Login</button>
-  <button class="secondary">Get Started</button>
-</section>
+    <div class="hero">
+        <h1>Smart Campus Portal</h1>
+        <p>
+            Manage attendance, results and communication in one simple platform.
+        </p>
 
-<section class="features">
-  <div class="feature-card">
-    <h3>📊 Attendance</h3>
-    <p>Track semester-wise attendance with clarity and accuracy.</p>
-  </div>
+        <button onclick="goToLogin()">Login</button>
+    </div>
 
-  <div class="feature-card">
-    <h3>📄 Results</h3>
-    <p>View semester and year-wise results with performance insights.</p>
-  </div>
+    <div class="features">
 
-  <div class="feature-card">
-    <h3>🎓 Guidance</h3>
-    <p>Academic and career guidance from faculty and mentors.</p>
-  </div>
+        <div class="card">
+            <h3>📊 Attendance</h3>
+            <p>Track your attendance easily</p>
+        </div>
 
-  <div class="feature-card">
-    <h3>💬 Communication</h3>
-    <p>Connect with faculty, admission cell, and placement cell.</p>
-  </div>
-</section>
+        <div class="card">
+            <h3>📄 Results</h3>
+            <p>View academic performance</p>
+        </div>
 
-<section class="users">
-  <h2>Who Is This For?</h2>
-  <div class="user-box">
-    <div class="user">👩‍🎓 Students</div>
-    <div class="user">👩‍🏫 Faculty</div>
-    <div class="user">⚙️ Administrators</div>
-  </div>
-</section>
+        <div class="card">
+            <h3>💬 Communication</h3>
+            <p>Connect with faculty</p>
+        </div>
 
-<footer>
-  © 2026 Smart Campus Portal | Academic Interface
-</footer>
-<script>
-function goToLogin(){
-  window.location.href="login.html";
-}
-</script>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Smart Campus Portal</p>
+    </div>
+
+    <script>
+        function goToLogin() {
+            window.location.href = "login.html";
+        }
+    </script>
+
 </body>
 </html>
