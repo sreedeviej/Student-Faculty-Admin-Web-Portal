@@ -1,147 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Campus Portal</title>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background: linear-gradient(to right, #eef2f7, #dfe9f3);
-        }
-
-        /* Header */
-        .header {
-            background: #185a9d;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav a {
-            margin-left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .hero h1 {
-            color: #185a9d;
-            font-size: 36px;
-        }
-
-        .hero p {
-            max-width: 500px;
-            margin: 15px auto;
-            color: #555;
-        }
-
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
-            background: #185a9d;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #144a82;
-        }
-
-        /* Features */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 40px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            width: 220px;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .card h3 {
-            color: #185a9d;
-        }
-
-        /* Footer */
-        .footer {
-            background: #185a9d;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="grain"></div>
 
-    <div class="header">
-        <h2>Smart Campus</h2>
-        <div class="nav">
-            <a href="index.html">Home</a>
-            <a href="#">Features</a>
-            <a href="login.html">Login</a>
-        </div>
-    </div>
+    <header class="header page">
+        <nav class="nav">
+            <div class="logo">Smart <span>Campus</span></div>
+            <div class="nav-links">
+                <a class="active" href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="attendance.html">Analytics</a>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="hero">
-        <h1>Welcome to Smart Campus Portal</h1>
-        <p>
-            Manage attendance, results and communication in one simple platform.
-        </p>
+    <main class="main page">
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="tag">Student ERP, reimagined for engagement</span>
+                <h1>Welcome to <span>IILM University.</span></h1>
+                <p class="muted">Track attendance, manage academics, review performance, and stay connected with your faculty through one interactive portal.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="location.href='login.html'">Get Started</button>
+                    <button class="btn btn-soft" onclick="location.href='attendance.html'">View Analytics</button>
+                </div>
+            </div>
 
-        <button onclick="goToLogin()">Get Started</button>
-    </div>
+            <aside class="hero-panel panel">
+                <div class="status">
+                    <small>Campus activity</small>
+                    <strong>1,248 students active now</strong>
+                </div>
+                <div class="metric-grid">
+                    <article class="metric">
+                        <p>Attendance sync</p>
+                        <h3>Real-time</h3>
+                    </article>
+                    <article class="metric">
+                        <p>Assignment alerts</p>
+                        <h3>Daily</h3>
+                    </article>
+                    <article class="metric">
+                        <p>Faculty connect</p>
+                        <h3>Instant</h3>
+                    </article>
+                    <article class="metric">
+                        <p>Result insights</p>
+                        <h3>Visual</h3>
+                    </article>
+                </div>
+            </aside>
+        </section>
 
-    <div class="features">
+        <section class="panel section">
+            <div class="section-head">
+                <h2>Why students love this portal</h2>
+                <span class="muted">Built for clarity and speed</span>
+            </div>
+            <div class="grid-3">
+                <article class="panel section">
+                    <h3>Attendance Intelligence</h3>
+                    <p class="muted">See your attendance compared with class average in each subject with clear charts.</p>
+                </article>
+                <article class="panel section">
+                    <h3>Marks Visuals</h3>
+                    <p class="muted">Track marks by subject and compare your performance to peers in one view.</p>
+                </article>
+                <article class="panel section">
+                    <h3>Action Dashboard</h3>
+                    <p class="muted">Get reminders, notices, and progress status so you always know what to do next.</p>
+                </article>
+            </div>
+        </section>
+    </main>
 
-        <div class="card">
-            <h3>📊 Attendance</h3>
-            <p>Track your attendance easily</p>
-        </div>
-
-        <div class="card">
-            <h3>📄 Results</h3>
-            <p>View academic performance</p>
-        </div>
-
-        <div class="card">
-            <h3>💬 Communication</h3>
-            <p>Connect with faculty</p>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        <p>© 2026 Smart Campus Portal</p>
-    </div>
-
-    <script>
-        function goToLogin() {
-            window.location.href = "login.html";
-        }
-    </script>
-
+    <footer class="footer page">Copyright 2026 Smart Campus Portal</footer>
 </body>
 </html>

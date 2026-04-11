@@ -1,139 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Attendance - Smart Campus</title>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background: linear-gradient(to right, #eef2f7, #dfe9f3);
-        }
-
-        /* Header */
-        .header {
-            background: #185a9d;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav a {
-            margin-left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Container */
-        .container {
-            padding: 40px;
-            text-align: center;
-        }
-
-        h2 {
-            color: #185a9d;
-            margin-bottom: 20px;
-        }
-
-        /* Card */
-        .card {
-            width: 65%;
-            margin: auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background: #185a9d;
-            color: white;
-        }
-
-        tr:hover {
-            background: #f5f7fa;
-        }
-
-        /* Footer */
-        .footer {
-            background: #185a9d;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 40px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Analytics - Smart Campus Portal</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="grain"></div>
 
-    <div class="header">
-        <h2>Smart Campus</h2>
-        <div class="nav">
-            <a href="index.html">Home</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="login.html">Logout</a>
-        </div>
-    </div>
+    <header class="header page">
+        <nav class="nav">
+            <div class="logo">Smart <span>Campus</span></div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a class="active" href="attendance.html">Analytics</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h2>Attendance Details</h2>
+    <main class="main page">
+        <section class="panel section" style="margin-bottom: 14px;">
+            <div class="section-head">
+                <div>
+                    <h1 class="title">Subject-wise Analytics</h1>
+                    <p class="muted">Click any subject to view attendance distribution in a circular graph.</p>
+                </div>
+            </div>
+            <div id="subjectButtons" class="subject-buttons" aria-label="Subjects"></div>
+            <p id="subjectPrompt" class="muted" style="margin-top:10px;">Select a subject to reveal the graph.</p>
+        </section>
 
-        <div class="card">
-            <table>
-                <tr>
-                    <th>Subject</th>
-                    <th>Total Classes</th>
-                    <th>Attended</th>
-                    <th>Percentage</th>
-                </tr>
+        <section id="subjectAnalyticsSection" class="grid-2 hidden" style="margin-bottom: 14px;">
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Attendance Distribution</h2>
+                    <span class="badge good">Circle Graph</span>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="attendanceDonutChart"></canvas>
+                </div>
+            </article>
 
-                <tr>
-                    <td>Math</td>
-                    <td>40</td>
-                    <td>32</td>
-                    <td>80%</td>
-                </tr>
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Selected Subject Insight</h2>
+                    <span class="muted">Class breakdown</span>
+                </div>
+                <div id="subjectInsight" class="panel section"></div>
+                <ul id="distributionList" class="distribution-list"></ul>
+            </article>
+        </section>
 
-                <tr>
-                    <td>DBMS</td>
-                    <td>35</td>
-                    <td>30</td>
-                    <td>85%</td>
-                </tr>
+        <section class="panel section" style="margin-bottom: 14px;">
+            <div class="section-head">
+                <h2>Attendance Details</h2>
+                <span class="badge good">Live Snapshot</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Total Classes</th>
+                            <th>Attended</th>
+                            <th>Your %</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+            </div>
+        </section>
 
-                <tr>
-                    <td>OS</td>
-                    <td>38</td>
-                    <td>28</td>
-                    <td>74%</td>
-                </tr>
+    </main>
 
-            </table>
-        </div>
-    </div>
+    <footer class="footer page">Copyright 2026 Smart Campus Portal</footer>
 
-    <div class="footer">
-        <p>© 2026 Smart Campus Portal</p>
-    </div>
+    <script src="portal.js"></script>
+    <script>
+        mountAttendanceTable("attendanceTableBody");
 
+        const buttonsWrap = document.getElementById("subjectButtons");
+        const analyticsSection = document.getElementById("subjectAnalyticsSection");
+        const subjectPrompt = document.getElementById("subjectPrompt");
+
+        portalData.attendance.forEach((subject, index) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "chip-btn";
+            btn.textContent = subject.subject;
+            btn.addEventListener("click", function () {
+                window.selectedSubjectIndex = index;
+                analyticsSection.classList.remove("hidden");
+                subjectPrompt.textContent = `Showing distribution for ${subject.subject}.`;
+                buttonsWrap.querySelectorAll(".chip-btn").forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                mountSubjectAttendanceDistribution(index, "attendanceDonutChart", "distributionList", "subjectInsight");
+            });
+            buttonsWrap.appendChild(btn);
+        });
+    </script>
 </body>
 </html>

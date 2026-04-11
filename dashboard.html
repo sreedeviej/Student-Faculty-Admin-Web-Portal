@@ -1,123 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard - Smart Campus</title>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background: linear-gradient(to right, #eef2f7, #dfe9f3);
-        }
-
-        /* Header */
-        .header {
-            background: #185a9d;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav a {
-            margin-left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Container */
-        .container {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        h2 {
-            color: #185a9d;
-            margin-bottom: 30px;
-        }
-
-        /* Cards */
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            width: 230px;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: #185a9d;
-        }
-
-        /* Footer */
-        .footer {
-            background: #185a9d;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 40px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Campus Portal</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="grain"></div>
 
-    <div class="header">
-        <h2>Smart Campus</h2>
-        <div class="nav">
-            <a href="index.html">Home</a>
-            <a href="login.html">Logout</a>
-        </div>
-    </div>
+    <header class="header page">
+        <nav class="nav">
+            <div class="logo">Smart <span>Campus</span></div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a class="active" href="dashboard.html">Dashboard</a>
+                <a href="attendance.html">Analytics</a>
+                <a href="login.html" id="logoutBtn">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h2>Dashboard</h2>
-
-        <div class="cards">
-
-            <a href="attendance.html" style="text-decoration:none; color:black;">
-                <div class="card">
-                    <h3>📊 Attendance</h3>
-                    <p>View attendance details</p>
+    <main class="main page">
+        <section class="section panel" style="margin-bottom: 14px;">
+            <div class="section-head">
+                <div>
+                    <h1 class="title">Welcome back, <span id="studentName">Student</span></h1>
+                    <p class="muted" id="semesterLine">B.Tech CSE - Sem 4</p>
                 </div>
-            </a>
-
-            <div class="card">
-                <h3>📄 Results</h3>
-                <p>Check your results</p>
+                <button class="btn btn-soft" onclick="location.href='attendance.html'">Open Full Analytics</button>
             </div>
-
-            <div class="card">
-                <h3>💬 Messages</h3>
-                <p>Communicate with faculty</p>
+            <div class="grid-3">
+                <article class="panel kpi">
+                    <small>Average Attendance</small>
+                    <strong id="avgAttendance">0%</strong>
+                </article>
+                <article class="panel kpi">
+                    <small>Average Marks</small>
+                    <strong id="avgMarks">0%</strong>
+                </article>
+                <article class="panel kpi">
+                    <small>Top Subject</small>
+                    <strong id="bestSubject">-</strong>
+                </article>
             </div>
+        </section>
 
-        </div>
-    </div>
+        <section class="grid-2" style="margin-bottom: 14px;">
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Attendance vs Class</h2>
+                    <span class="badge good">By Subject</span>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="dashAttendanceChart"></canvas>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="swatch" style="background:#0f9d8f;"></span>Your Attendance</span>
+                    <span class="legend-item"><span class="swatch" style="background:#f05d23;"></span>Class Average</span>
+                </div>
+            </article>
 
-    <div class="footer">
-        <p>© 2026 Smart Campus Portal</p>
-    </div>
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Marks vs Class</h2>
+                    <span class="badge warn">Performance</span>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="dashMarksChart"></canvas>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="swatch" style="background:#0f9d8f;"></span>Your Marks</span>
+                    <span class="legend-item"><span class="swatch" style="background:#f05d23;"></span>Class Average</span>
+                </div>
+            </article>
+        </section>
 
+        <section class="grid-2">
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Campus Notices</h2>
+                    <span class="muted">Latest updates</span>
+                </div>
+                <div id="noticeList" class="note-list"></div>
+            </article>
+
+            <article class="panel section">
+                <div class="section-head">
+                    <h2>Today Checklist</h2>
+                    <span class="muted">Mark done</span>
+                </div>
+                <div id="todoList"></div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer page">Copyright 2026 Smart Campus Portal</footer>
+
+    <script src="portal.js"></script>
+    <script>
+        const overview = getOverview();
+        document.getElementById("studentName").textContent = getStudentName();
+        document.getElementById("semesterLine").textContent = portalData.semester;
+        document.getElementById("avgAttendance").textContent = `${overview.avgAttendance}%`;
+        document.getElementById("avgMarks").textContent = `${overview.avgMarks}%`;
+        document.getElementById("bestSubject").textContent = overview.bestSubject;
+
+        mountSubjectComparison("dashAttendanceChart", "dashMarksChart");
+        mountNotices("noticeList");
+
+        const todoItems = [
+            "Review DBMS assignment draft",
+            "Upload OS lab report",
+            "Check exam form deadline",
+            "Attend CN tutorial session"
+        ];
+
+        const todoNode = document.getElementById("todoList");
+        todoNode.innerHTML = todoItems.map((item, idx) => {
+            const id = `todo_${idx}`;
+            return `<label class="todo" for="${id}"><input class="checkbox" id="${id}" type="checkbox"> ${item}</label>`;
+        }).join("");
+
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+            clearSession();
+        });
+    </script>
 </body>
 </html>
