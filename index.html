@@ -1,86 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Campus Portal</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCampus ERP Social Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="grain"></div>
+  <main class="login-screen" id="loginPage">
+    <section class="login-panel">
+      <div class="brand-mark">SC</div>
+      <h1>SmartCampus</h1>
+      <p>Mini campus social media with ERP tools, faculty access, alumni guidance, events, groups, results, and attendance.</p>
 
-    <header class="header page">
-        <nav class="nav">
-            <div class="logo">Smart <span>Campus</span></div>
-            <div class="nav-links">
-                <a class="active" href="index.html">Home</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="attendance.html">Analytics</a>
-                <a href="login.html">Login</a>
+      <label for="username">Student or faculty name</label>
+      <input type="text" id="username" placeholder="Example: Aditi Sharma">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Use any password">
+
+      <button type="button" onclick="login()">Enter Campus</button>
+    </section>
+  </main>
+
+  <main id="appPage" class="app hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark small">SC</div>
+        <div>
+          <strong>SmartCampus</strong>
+          <span>ERP + Social</span>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Primary">
+        <button class="nav-item active" data-view="home" onclick="switchView('home')">Home</button>
+        <button class="nav-item" data-view="network" onclick="switchView('network')">People</button>
+        <button class="nav-item" data-view="help" onclick="switchView('help')">Academic Help</button>
+        <button class="nav-item" data-view="dashboard" onclick="switchView('dashboard')">Dashboard</button>
+        <button class="nav-item" data-view="events" onclick="switchView('events')">Events</button>
+        <button class="nav-item" data-view="groups" onclick="switchView('groups')">Groups</button>
+        <button class="nav-item" data-view="messages" onclick="switchView('messages')">Messages</button>
+      </nav>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Campus community portal</p>
+          <h2 id="viewTitle">Home Feed</h2>
+        </div>
+        <div class="user-chip">
+          <span id="userAvatar">AS</span>
+          <div>
+            <strong id="userDisplay">Student</strong>
+            <small>B.Tech CSE, Sem 5</small>
+          </div>
+        </div>
+      </header>
+
+      <section class="view active" id="homeView">
+        <div class="layout-grid">
+          <div class="feed-column">
+            <article class="composer">
+              <textarea id="achievementInput" placeholder="Share an achievement, internship update, project, certification, or placement preparation milestone"></textarea>
+              <div class="composer-tools">
+                <select id="postType">
+                  <option value="Project Update">Project Update</option>
+                  <option value="Handwritten Notes">Handwritten Notes</option>
+                  <option value="Certification">Certification</option>
+                  <option value="Internship Update">Internship Update</option>
+                </select>
+                <label class="file-picker">
+                  Upload Files
+                  <input type="file" id="postImage" accept="image/*">
+                </label>
+              </div>
+              <button type="button" onclick="addAchievement()">Post</button>
+            </article>
+            <div class="section-heading">
+              <h3>Achievement Showcase</h3>
+              <span>LinkedIn-style campus feed</span>
             </div>
-        </nav>
-    </header>
+            <div id="achievementFeed" class="feed"></div>
+          </div>
 
-    <main class="main page">
-        <section class="hero">
-            <div class="hero-copy">
-                <span class="tag">Student ERP, reimagined for engagement</span>
-                <h1>Welcome to <span>IILM University.</span></h1>
-                <p class="muted">Track attendance, manage academics, review performance, and stay connected with your faculty through one interactive portal.</p>
-                <div class="hero-cta">
-                    <button class="btn btn-primary" onclick="location.href='login.html'">Get Started</button>
-                    <button class="btn btn-soft" onclick="location.href='attendance.html'">View Analytics</button>
-                </div>
+          <aside class="right-rail">
+            <div class="panel">
+              <h3>Upcoming Highlights</h3>
+              <div id="eventPreview" class="stack-list"></div>
             </div>
-
-            <aside class="hero-panel panel">
-                <div class="status">
-                    <small>Campus activity</small>
-                    <strong>1,248 students active now</strong>
-                </div>
-                <div class="metric-grid">
-                    <article class="metric">
-                        <p>Attendance sync</p>
-                        <h3>Real-time</h3>
-                    </article>
-                    <article class="metric">
-                        <p>Assignment alerts</p>
-                        <h3>Daily</h3>
-                    </article>
-                    <article class="metric">
-                        <p>Faculty connect</p>
-                        <h3>Instant</h3>
-                    </article>
-                    <article class="metric">
-                        <p>Result insights</p>
-                        <h3>Visual</h3>
-                    </article>
-                </div>
-            </aside>
-        </section>
-
-        <section class="panel section">
-            <div class="section-head">
-                <h2>Why students love this portal</h2>
-                <span class="muted">Built for clarity and speed</span>
+            <div class="panel">
+              <h3>Suggested Connections</h3>
+              <div id="connectionPreview" class="stack-list"></div>
             </div>
-            <div class="grid-3">
-                <article class="panel section">
-                    <h3>Attendance Intelligence</h3>
-                    <p class="muted">See your attendance compared with class average in each subject with clear charts.</p>
-                </article>
-                <article class="panel section">
-                    <h3>Marks Visuals</h3>
-                    <p class="muted">Track marks by subject and compare your performance to peers in one view.</p>
-                </article>
-                <article class="panel section">
-                    <h3>Action Dashboard</h3>
-                    <p class="muted">Get reminders, notices, and progress status so you always know what to do next.</p>
-                </article>
-            </div>
-        </section>
-    </main>
+          </aside>
+        </div>
+      </section>
 
-    <footer class="footer page">Copyright 2026 Smart Campus Portal</footer>
+      <section class="view" id="networkView">
+        <div class="toolbar">
+          <input type="text" id="peopleSearch" placeholder="Search faculty, students, alumni, skills..." oninput="renderPeople()">
+          <select id="roleFilter" onchange="renderPeople()">
+            <option value="All">All roles</option>
+            <option value="Student">Students</option>
+            <option value="Faculty">Faculty</option>
+            <option value="Alumni">Alumni</option>
+          </select>
+        </div>
+        <div id="peopleGrid" class="profile-grid"></div>
+      </section>
+
+      <section class="view" id="helpView">
+        <article class="composer compact">
+          <input type="text" id="helpTitle" placeholder="Problem title, e.g. Need help in DBMS normalization">
+          <textarea id="helpBody" placeholder="Explain the academic doubt, subject, deadline, or what help you need"></textarea>
+          <button type="button" onclick="addHelpPost()">Ask Campus</button>
+        </article>
+        <div id="helpFeed" class="help-feed"></div>
+      </section>
+
+      <section class="view" id="dashboardView">
+        <div class="dashboard-actions">
+          <button type="button" onclick="openEditProfile()">Edit Profile</button>
+          <button type="button" onclick="viewResume()">View Current Resume</button>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><span>Overall Attendance</span><strong>84%</strong><small>Good standing</small></div>
+          <div class="stat-card"><span>Current CGPA</span><strong>8.41</strong><small>Sem 5 updated</small></div>
+          <div class="stat-card"><span>Credits Earned</span><strong>112</strong><small>148 required</small></div>
+          <div class="stat-card"><span>Pending Fees</span><strong>0</strong><small>No dues</small></div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="panel">
+            <h3>Attendance by Semester</h3>
+            <div id="attendanceList" class="progress-list"></div>
+          </div>
+          <div class="panel">
+            <h3>Results</h3>
+            <div id="resultList" class="result-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="eventsView">
+        <div id="eventGrid" class="event-grid"></div>
+      </section>
+
+      <section class="view" id="groupsView">
+        <article class="composer compact group-create">
+          <input type="text" id="groupName" placeholder="Create group, e.g. Cloud Security Circle">
+          <input type="text" id="groupTopic" placeholder="Topic or interest">
+          <button type="button" onclick="createGroup()">Create Group</button>
+        </article>
+        <div id="groupGrid" class="group-grid"></div>
+      </section>
+
+      <section class="view" id="messagesView">
+        <div class="chat-layout">
+          <div class="chat-people">
+            <div class="chat-search">
+              <input type="text" id="messageSearch" placeholder="Search people..." oninput="renderChats()">
+            </div>
+            <div id="chatPeople"></div>
+          </div>
+          <div class="chat-window">
+            <div id="chatHeader" class="chat-header"></div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-input">
+              <input type="text" id="messageInput" placeholder="Type a message to faculty, alumni, or student">
+              <button type="button" onclick="sendMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="profileModal" onclick="closeProfileModal(event)">
+    <section class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <button class="modal-close" type="button" onclick="closeProfileModal()">Close</button>
+      <div id="profileModalContent"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop hidden" id="dashboardModal" onclick="closeDashboardModal(event)">
+    <section class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="dashboardModalTitle">
+      <button class="modal-close" type="button" onclick="closeDashboardModal()">Close</button>
+      <div id="dashboardModalContent"></div>
+    </section>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
