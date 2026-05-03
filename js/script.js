@@ -1,3 +1,5 @@
+console.log("SCRIPT LOADED");
+
 const people = [
   {
     name: "Dr. Meera Nair",
@@ -365,6 +367,7 @@ function login() {
   document.getElementById("userDisplay").innerText = user;
   document.getElementById("userAvatar").innerText = initials(user);
   renderAll();
+  loadPosts();
 }
 
 function initials(name) {
@@ -478,10 +481,9 @@ function renderPostMedia(post) {
   return "";
 }
 
-function addAchievement() {
+async function addAchievement() {
   const input = document.getElementById("achievementInput");
   const type = document.getElementById("postType").value;
-  const fileInput = document.getElementById("postImage");
   const text = input.value.trim();
 
   if (!text) {
@@ -489,18 +491,21 @@ function addAchievement() {
     return;
   }
 
-  achievements.unshift({
-    author: document.getElementById("userDisplay").innerText,
-    role: "Student",
-    text,
-    stats: "0 likes | just now",
-    type,
-    image: pendingPostImage
+  await fetch("http://localhost:5000/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      author: document.getElementById("userDisplay").innerText,
+      text,
+      type
+    })
   });
+
   input.value = "";
-  fileInput.value = "";
-  pendingPostImage = "";
-  renderAchievements();
+
+  loadPosts(); // reload from database
 }
 
 function renderPeople() {
@@ -892,3 +897,115 @@ function renderPreviews() {
     </div>
   `).join("");
 }
+// ================= BACKEND INTEGRATION =================
+
+const API_BASE = "http://localhost:5000";
+
+// LOAD POSTS FROM DB
+async function loadPosts() {
+  console.log("LOADING POSTS...");
+
+  try {
+    const res = await fetch(`${API_BASE}/posts`);
+
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    console.log("DATA FROM BACKEND:", data);
+
+    // clear existing feed (but keep array reference)
+    achievements.length = 0;
+
+    data.forEach(post => {
+      achievements.push({
+        author: post.author || "Unknown",
+        role: "Student",
+        text: post.text || "",
+        stats: `${post.likes || 0} likes`,
+        type: post.type || "Post",
+        image: post.image || ""
+      });
+    });
+
+    renderAchievements();
+
+  } catch (err) {
+    console.error("LOAD POSTS ERROR:", err);
+
+    // fallback → don't break UI
+    renderAchievements();
+  }
+}
+
+// 🔥 ADD POST
+async function addAchievement() {
+  const input = document.getElementById("achievementInput");
+  const type = document.getElementById("postType").value;
+  const text = input.value.trim();
+
+  if (!text) {
+    alert("Write something to post");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        author: document.getElementById("userDisplay").innerText,
+        text,
+        type
+      })
+    });
+
+    if (!res.ok) {
+      throw new Error("Post failed");
+    }
+
+    input.value = "";
+    loadPosts();
+
+  } catch (err) {
+    console.error("POST ERROR:", err);
+    alert("Failed to post. Check backend.");
+  }
+}
+
+// ================= LOGIN FLOW FIX =================
+
+function login() {
+  const user = document.getElementById("username").value.trim();
+
+  if (!user) {
+    alert("Enter your name to continue");
+    return;
+  }
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("appPage").classList.remove("hidden");
+
+  document.getElementById("userDisplay").innerText = user;
+  document.getElementById("userAvatar").innerText = initials(user);
+
+  renderAll();
+
+  // Only load AFTER login
+  loadPosts();
+}
+
+// ================= PAGE LOAD =================
+
+//  DO NOT auto load posts here (causes race issues)
+// document.addEventListener("DOMContentLoaded", () => {
+//   loadPosts();
+// });
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("PAGE LOADED");
+});
