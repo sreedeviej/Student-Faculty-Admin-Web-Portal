@@ -82,14 +82,14 @@ const people = [
     highlights: ["Solved 450 DSA problems", "Built placement tracker API", "Runs Java practice sessions"]
   },
   {
-    name: "Sara Khan",
-    role: "Student",
-    title: "CSE Sem 5",
-    skills: ["Cybersecurity", "Linux", "Networking"],
-    bio: "Active in cybersecurity club and CTF practice groups.",
-    about: "Cybersecurity learner exploring Linux hardening, web security, and beginner CTF challenges.",
+    name: "Akhila S A",
+    role: "Alumni",
+    title: "Senior scientific officer at CBI",
+    skills: ["Fingerprint Analysis", "Forensic odontology", "Networking"],
+    bio: "Active in forensic science club and CTF practice groups.",
+    about: "Forensic science expert exploring fingerprint analysis, odontology, and networking.",
     stats: { connections: 341, posts: 21, helped: 35 },
-    highlights: ["Won internal CTF challenge", "Shared Linux command notes", "Started web security reading group"]
+    highlights: ["Provided excellent guidance to students","Visiting faculty for digital forensic", "Provided expert opinion on Talwar double murder case", "submitted thesis on gender determination at Oxford University"]
   },
   {
     name: "Dr. Vikram Sethi",
@@ -153,8 +153,8 @@ const achievements = [
     media: "notes"
   },
   {
-    author: "Sara Khan",
-    role: "Student",
+    author: "Akhila S A",
+    role: "Alumni",
     text: "Completed the Google Cybersecurity certificate and added my project report on phishing awareness for campus users.",
     stats: "141 likes | 22 comments",
     type: "Certification",
@@ -491,7 +491,7 @@ async function addAchievement() {
     return;
   }
 
-  await fetch("http://localhost:5000/posts", {
+  await fetch("https://smart-campus-backend-nsmi.onrender.com/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -899,7 +899,7 @@ function renderPreviews() {
 }
 // ================= BACKEND INTEGRATION =================
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://smart-campus-backend-nsmi.onrender.com";
 
 // LOAD POSTS FROM DB
 async function loadPosts() {
