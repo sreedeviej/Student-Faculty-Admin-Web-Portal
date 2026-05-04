@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // 1. Connect to MongoDB using your .env variable
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch(err => console.error("❌ Connection error:", err));
 
